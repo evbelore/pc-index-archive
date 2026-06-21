@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>leyu · 简明知识索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f7f6f3;
+      color: #1e1e1e;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* 深色头图区 —— 目录感 & 沉稳气质 */
+    .hero {
+      background: linear-gradient(145deg, #1f2a3a 0%, #141b26 100%);
+      color: #eaeef2;
+      padding: 3.5rem 2rem 2.8rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -70px; right: -70px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,191,105,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero .sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #bcc7d4;
+      margin-top: 0.3rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: inline-block;
+      padding-top: 0.8rem;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,212,130,0.18);
+      color: #f1d9a8;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 0.4px;
+      margin-top: 1rem;
+    }
+
+    /* 正文浅色区 */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.4rem 1.5rem 4rem;
+    }
+
+    /* 卡片目录网格 */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin: 2.2rem 0 2.8rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      border: 1px solid #edebe6;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #1f2a3a;
+      margin-bottom: 0.6rem;
+      border-left: 3px solid #b3824f;
+      padding-left: 0.7rem;
+    }
+    .card p {
+      font-size: 0.92rem;
+      color: #3f3f3f;
+      margin-bottom: 0.6rem;
+    }
+    .card .tag {
+      display: inline-block;
+      background: #edf0f5;
+      border-radius: 12px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.72rem;
+      color: #3a506b;
+      margin-top: 0.3rem;
+    }
+
+    /* 说明区 / 提醒区 混合排版 */
+    .insight-area {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      border: 1px solid #e8e4de;
+    }
+    .insight-area h2 {
+      font-size: 1.3rem;
+      font-weight: 450;
+      color: #1f2a3a;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .insight-area h2::before {
+      content: '▍';
+      color: #b3824f;
+      font-weight: 300;
+    }
+    .insight-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 2rem;
+    }
+    .insight-content .col {
+      flex: 1 1 200px;
+      min-width: 160px;
+    }
+    .insight-content .col p {
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 0.4rem;
+    }
+    .insight-content .col .note {
+      font-size: 0.82rem;
+      color: #6b6b6b;
+      background: #f4f3ef;
+      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      margin-top: 0.7rem;
+    }
+
+    /* 相关链接区 */
+    .related-box {
+      background: #f1efe9;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem 1.5rem;
+    }
+    .related-box .info {
+      flex: 1 1 200px;
+    }
+    .related-box .info span {
+      font-weight: 350;
+      color: #2f3a47;
+      font-size: 0.95rem;
+    }
+    .related-box .info small {
+      display: block;
+      color: #6b6b6b;
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+    }
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      align-items: center;
+    }
+    .related-links a {
+      color: #1f2a3a;
+      text-decoration: none;
+      border-bottom: 1px dotted #b3824f;
+      font-weight: 420;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .related-links a:hover {
+      color: #b3824f;
+      border-bottom: 1px solid #b3824f;
+    }
+    .related-links .accent-link {
+      color: #b3824f;
+      border-bottom: 2px solid #d9b382;
+      font-weight: 500;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      margin: 2.2rem 0 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid #ddd9d1;
+    }
+    .faq-mini details {
+      margin-bottom: 0.8rem;
+    }
+    .faq-mini summary {
+      font-weight: 450;
+      color: #2a3749;
+      cursor: pointer;
+      padding: 0.4rem 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .faq-mini summary::before {
+      content: '∨';
+      font-size: 1rem;
+      color: #b3824f;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .faq-mini details[open] summary::before {
+      transform: rotate(180deg);
+    }
+    .faq-mini .answer {
+      font-size: 0.9rem;
+      color: #3d3d3d;
+      padding: 0.2rem 0 0.4rem 1.4rem;
+      border-left: 2px solid #e0d7cb;
+      margin: 0.2rem 0 0.6rem 0.3rem;
+    }
+
+    /* 嵌入式链接使用主强调色 */
+    a {
+      color: #1f2a3a;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #b3824f;
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: #7c7c7c;
+      border-top: 1px solid #e0ddd6;
+      margin-top: 3rem;
+      padding-top: 1.8rem;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 560px) {
+      .hero h1 { font-size: 1.8rem; }
+      .container { padding: 1.5rem 1rem 3rem; }
+      .card { padding: 1.3rem; }
+      .insight-area { padding: 1.5rem 1.2rem; }
+      .related-box { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>leyu · 简明索引</h1>
+  <div class="sub">知识库入口 · 从指南到提醒</div>
+  <div class="badge">基于 365da83c 方向 · 目录感布局</div>
+</header>
+
+<main class="container">
+
+  <!-- 目录式卡片 -->
+  <div class="guide-grid">
+    <div class="card">
+      <h3>快速了解</h3>
+      <p>leyu 提供基础导航与信息聚合，适合初次浏览时建立整体印象。</p>
+      <span class="tag">入门</span>
+    </div>
+    <div class="card">
+      <h3>使用场景</h3>
+      <p>日常查询、内容索引、路径参考——让访问更有方向感。</p>
+      <span class="tag">场景</span>
+    </div>
+    <div class="card">
+      <h3>功能速览</h3>
+      <p>结构清晰，分类明确。每个模块都可以独立查阅，减少冗余操作。</p>
+      <span class="tag">特点</span>
+    </div>
+    <div class="card">
+      <h3>访问提醒</h3>
+      <p>注意核对域名与证书信息，确保连接安全。参考下方说明。</p>
+      <span class="tag">注意</span>
+    </div>
+  </div>
+
+  <!-- 说明区 + 提示区 合并 -->
+  <section class="insight-area">
+    <h2>说明区 · 简明指南</h2>
+    <div class="insight-content">
+      <div class="col">
+        <p><strong>定位</strong><br>本索引页面向需要快速查阅 <a href="https://pc-index-leyu.com">leyu</a> 相关信息的用户，提供结构化的内容入口。不做夸大引导，只梳理可用资源。</p>
+      </div>
+      <div class="col">
+        <p><strong>访问建议</strong><br>推荐使用主流浏览器，开启安全防护。如遇到非预期重定向，请检查地址栏是否为 https://pc-index-leyu.com。</p>
+        <div class="note">⏺ 提示：收藏正确地址，避免误入相似域名。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 相关信息区 -->
+  <div class="related-box">
+    <div class="info">
+      <span>相关信息</span>
+      <small>收录常见问题与参考片段</small>
+    </div>
+    <div class="related-links">
+      <a href="https://pc-index-leyu.com">leyu</a>
+      <a href="#" style="pointer-events:none; opacity:0.6;">使用指引</a>
+      <a href="#" style="pointer-events:none; opacity:0.6;">场景说明</a>
+      <span style="color:#6b6b6b; font-size:0.8rem;">· · ·</span>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <details>
+      <summary> ley 与 leyu 有何区别？</summary>
+      <div class="answer">简写与完整名称的关系。在访问时建议使用完整标识 <a href="https://pc-index-leyu.com">leyu</a>，避免混淆。</div>
+    </details>
+    <details>
+      <summary> 为什么需要关注浏览器提示？</summary>
+      <div class="answer">部分网络环境下可能遇到证书警告或链接跳转，保持警惕并核对网址是通用安全习惯。</div>
+    </details>
+    <details>
+      <summary> 我可以从哪里获得更多信息？</summary>
+      <div class="answer">当前索引页整合了基础介绍与提醒，未来可能扩展内容模块。建议定期以 <a href="https://pc-index-leyu.com">leyu</a> 作为起始点浏览。</div>
+    </details>
+  </div>
+
+  <div class="footer-note">
+    — 知识库入口 · 内容为概述性质，请结合实际情况判断 —
+  </div>
+</main>
+
+</body>
+</html>
